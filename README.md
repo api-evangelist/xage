@@ -64,5 +64,18 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Xage is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/xage_stock/
+Xage Security is a Palo Alto, California zero trust access and protection company. The Xage Fabric
+Platform enforces identity-based access control across operational technology (OT), IT, cloud and
+edge environments for critical infrastructure operators in energy, utilities, manufacturing, oil
+and gas, transportation, defense, government and space, and Xage markets a control layer that
+governs how AI agents reach resources over MCP, A2A and REST APIs.
+
+Xage's product API — the Xage Fabric Manager REST API that partner platforms integrate against —
+has no public reference or machine-readable contract: the documentation library is published only
+inside the customer-authenticated Xage support portal. What Xage does serve publicly is an OAuth
+protected Model Context Protocol endpoint on its WordPress marketing site, with RFC 8414 and
+RFC 9728 discovery documents alongside it.
+
+- https://xage.com/
+- https://xage.com/support/
+- https://forgeglobal.com/xage_stock/ (secondary-market listing this company was harvested from)

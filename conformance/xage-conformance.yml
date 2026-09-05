@@ -1,0 +1,82 @@
+generated: '2026-09-04'
+method: probed
+source: >-
+  https://xage.com/.well-known/oauth-authorization-server and
+  https://xage.com/.well-known/oauth-protected-resource
+note: >-
+  Every entry below is asserted against a document Xage actually serves, not against a marketing
+  claim. All of them concern the WordPress-hosted MCP server on xage.com. No compliance
+  certification page, trust center or audit report (SOC 2 / ISO 27001 / FedRAMP) was found on any
+  Xage host, so no Compliance pointer is emitted — an unproven certification claim is worse than a
+  recorded absence for a company that sells security.
+conformance:
+- id: oauth2
+  conforms: true
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+  detail: >-
+    OAuth 2.0 authorization_code + refresh_token grants with an authorization, token and
+    revocation endpoint published in machine-readable metadata.
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata
+  conforms: true
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+  detail: 'Served at the canonical well-known path, HTTP 200, valid JSON with issuer + endpoints.'
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: true
+  evidence: https://xage.com/.well-known/oauth-protected-resource
+  detail: >-
+    Declares resource https://xage.com/wp-json/mcp/mcp-oauth-server, authorization_servers
+    [https://xage.com], bearer_methods_supported [header], scopes_supported [mcp].
+- id: rfc7636
+  name: PKCE
+  conforms: true
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+  detail: 'code_challenge_methods_supported: [S256]; token_endpoint_auth_methods_supported: [none] (public client).'
+- id: rfc9207
+  name: OAuth 2.0 Authorization Server Issuer Identification
+  conforms: true
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+  detail: 'authorization_response_iss_parameter_supported: true.'
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: https://xage.com/wp-json/mcp/mcp-oauth-server
+  detail: >-
+    JSON-RPC 2.0 endpoint answering tools/list and initialize with a structured MCP error
+    (401 mcp_unauthorized) rather than a generic HTTP error, and paired with RFC 9728 discovery.
+    Anonymous introspection is gated, so protocol version was not confirmed from the wire.
+- id: rfc7591
+  name: OAuth 2.0 Dynamic Client Registration
+  conforms: false
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+  detail: >-
+    No registration_endpoint is advertised. The server instead sets
+    client_id_metadata_document_supported, the newer client-ID-metadata-document approach.
+- id: openid-connect
+  conforms: false
+  evidence: https://xage.com/.well-known/openid-configuration
+  detail: '/.well-known/openid-configuration returns 404; this is a bare OAuth 2.0 server, not OIDC.'
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: https://xage.com/.well-known/security.txt
+  detail: '404 on xage.com, www.xage.com and info.xage.com.'
+domain_standard:
+  found: false
+  note: >-
+    No domain standard is declared by any Xage contract. The sector (OT / ICS zero trust) has
+    frameworks Xage markets against — IEC 62443, NIST SP 800-207, MITRE ATT&CK for ICS, NERC CIP,
+    CMMC — but these are architectural frameworks referenced in blog and datasheet prose, not
+    message or schema standards a contract can declare, and no Xage contract is public to check.
+    Reward-only check: recorded as absent, not as a failure.
+certifications:
+  found: false
+  probed:
+  - url: https://trust.xage.com/
+    status: 0
+    note: does not resolve
+  - url: https://xage.com/security/
+    status: 404
+  - url: https://xage.com/legal/
+    status: 404

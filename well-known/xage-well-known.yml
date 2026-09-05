@@ -1,0 +1,99 @@
+generated: '2026-09-04'
+method: probed
+source: live HTTPS probes of the named /.well-known path list on every host this record knows
+note: >-
+  Two documents are genuinely served, both on xage.com and both belonging to a Model Context
+  Protocol server that the Xage Security marketing site (WordPress) exposes: RFC 8414 OAuth
+  authorization server metadata and RFC 9728 OAuth protected resource metadata. security.txt,
+  openid-configuration, api-catalog, ai-plugin.json and both agent-card paths 404 on every host.
+  support.xage.com sits behind a Cloudflare bot challenge (403 "Just a moment...") on every path,
+  so its /.well-known surface could not be read; that is our wall, not a recorded absence.
+  docs.xage.com resolves in DNS (13.91.132.74) but has no listener on 80 or 443 — a dangling record.
+hosts:
+- host: xage.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: well-known/xage-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: well-known/xage-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.xage.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: well-known/xage-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: well-known/xage-oauth-protected-resource.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: support.xage.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+  - path: /.well-known/ai-plugin.json
+    status: 403
+  - path: /.well-known/agent-card.json
+    status: 403
+  - path: /.well-known/agent.json
+    status: 403
+- host: info.xage.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: docs.xage.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+    note: DNS resolves to 13.91.132.74 but TCP 80 and 443 are closed; no probe completed
+agent_card:
+  found: false
+  note: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json both 404 on xage.com and
+    www.xage.com and 404 on info.xage.com. No A2A agent card exists, so a2a/ was deliberately not
+    written — this artifact is search-only and must never be authored on a provider's behalf.

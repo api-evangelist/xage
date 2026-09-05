@@ -1,0 +1,29 @@
+generated: '2026-09-04'
+method: searched
+source: registry sweep — npm, PyPI, RubyGems, crates.io, GitHub
+note: >-
+  No first-party Xage Security client library, SDK or CLI exists on any public registry, and Xage
+  operates no public GitHub organization. The npm/crates/RubyGems name hits for "xage" belong to
+  unrelated projects (xage-200-unixz, xagent-pi, xagemu) and are recorded here only so a future
+  round does not re-chase them. Consistent with a customer-only documentation posture: the Fabric
+  Manager API is integrated by partner platforms (e.g. Axonius) rather than by a published SDK.
+package_count: 0
+official_package_count: 0
+packages: []
+registries_checked:
+- registry: npm
+  query: xage
+  result: no first-party package
+  url: https://registry.npmjs.org/-/v1/search?text=xage
+- registry: pypi
+  queries: [xage, xage-sdk, xagesecurity, pyxage]
+  result: 404 on every candidate
+- registry: rubygems
+  query: xage
+  result: no first-party package
+- registry: crates.io
+  query: xage
+  result: no first-party package
+- registry: github
+  queries: [org xage, org xage-security, org xageinc, org xagesecurity]
+  result: 404 — no Xage Security GitHub organization exists

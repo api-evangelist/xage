@@ -1,0 +1,21 @@
+generated: '2026-09-04'
+method: probed
+source: https://xage.com/.well-known/oauth-authorization-server
+note: >-
+  The only OAuth scope Xage publishes anywhere is the single `mcp` scope advertised in the RFC 8414
+  authorization server metadata and echoed in the RFC 9728 protected resource metadata for the
+  WordPress MCP server on xage.com. No scope or permission reference exists for the Xage Fabric
+  Platform product API — that documentation is customer-only. Nothing here was derived from a spec;
+  there is no published OpenAPI.
+authorization_server: https://xage.com
+scopes:
+- name: mcp
+  description: >-
+    Access the Model Context Protocol server at https://xage.com/wp-json/mcp/mcp-oauth-server.
+    Advertised verbatim as the sole entry in scopes_supported; no finer-grained description is
+    published, and no per-tool scopes are declared.
+  resource: https://xage.com/wp-json/mcp/mcp-oauth-server
+  evidence: https://xage.com/.well-known/oauth-authorization-server
+scope_count: 1
+docs: null
+docs_note: No published scopes or permissions reference page.

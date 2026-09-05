@@ -1,0 +1,20 @@
+generated: '2026-09-04'
+method: searched
+source: https://xage.com/support/
+note: >-
+  No published rate limits. Xage has no public developer documentation — the product reference
+  lives inside the customer-authenticated support portal — so there is no page on which limits,
+  windows, burst allowances or exhaustion status codes could be documented. Nothing was inferred.
+  The one publicly reachable Xage API surface, the WordPress MCP endpoint, returns 401 anonymously
+  and emits no RateLimit-* or X-RateLimit-* response headers on that rejection.
+limit_count: 0
+rate_limits: []
+response_headers: []
+exhaustion_status: null
+evidence:
+- url: https://xage.com/support/
+  status: 200
+- url: https://xage.zendesk.com/api/v2/help_center/en-us/articles.json
+  status: 401
+- url: https://xage.com/wp-json/mcp/mcp-oauth-server
+  status: 401

@@ -1,7 +1,16 @@
 aid: xage
 name: Xage
-description: 'Xage is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Xage Security is a Palo Alto, California zero trust access and protection
+  company whose Xage Fabric Platform enforces identity-based access control across
+  operational technology (OT), IT, cloud and edge environments — covering privileged
+  access management, secure remote access, VPN replacement, zero trust segmentation,
+  critical asset protection and zero trust data exchange for critical infrastructure
+  operators in energy, utilities, manufacturing, oil and gas, transportation, defense,
+  government and space. Xage also markets a control layer that governs how AI agents
+  reach resources over MCP, A2A and REST APIs. The Fabric Manager exposes a REST API
+  that third-party platforms integrate against, but its reference documentation is
+  published only inside the customer-authenticated Xage support portal.'
+image: https://xage.com/wp-content/uploads/2023/07/cropped-Xage-Favicon-192x192.png
 url: https://raw.githubusercontent.com/api-evangelist/xage/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
@@ -12,6 +21,15 @@ created: '2026-09-04'
 modified: '2026-09-04'
 tags:
 - Company
+- Security
+- Cybersecurity
+- Zero Trust
+- Identity and Access Management
+- Privileged Access Management
+- Operational Technology
+- Critical Infrastructure
+- Industrial
+- Agent Security
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +37,61 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/xage-domain-security.yml
+- type: WellKnown
+  url: well-known/xage-well-known.yml
+- type: MCPServer
+  url: mcp/xage-mcp.yml
+- type: LLMsTxt
+  url: llms/xage-llms.txt
+- type: Authentication
+  url: authentication/xage-authentication.yml
+- type: OAuthScopes
+  url: scopes/xage-scopes.yml
+- type: Conformance
+  url: conformance/xage-conformance.yml
+- type: Plans
+  url: plans/xage-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/xage-rate-limits.yml
 - type: Website
-  url: https://forgeglobal.com/xage_stock/
+  url: https://xage.com/
+- type: Blog
+  url: https://xage.com/blog/
+- type: BlogRSS
+  url: https://xage.com/feed/
+- type: Support
+  url: https://xage.com/support/
+- type: PrivacyPolicy
+  url: https://xage.com/privacy-policy/
+- type: Careers
+  url: https://xage.com/careers/
+- type: PressReleases
+  url: https://xage.com/press/
+- type: CaseStudies
+  url: https://xage.com/case-studies/
+- type: Partners
+  url: https://xage.com/partners/
+x-enrichment:
+  date: '2026-09-04'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v3
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Xage's own support page tells you the documentation library lives inside the Xage support
+    portal, and that portal's Zendesk Help Center API answers anonymously with HTTP 401
+    "Couldn't authenticate you" — so the Fabric Manager REST API that partners such as Axonius
+    integrate against has no readable public reference, base URL or spec; docs.xage.com resolves
+    in DNS but has no listener on 80 or 443.
+  evidence:
+  - url: https://xage.zendesk.com/api/v2/help_center/en-us/articles.json
+    status: 401
+  - url: https://xage.com/support/
+    status: 200
+  - url: https://docs.xage.com/
+    status: 0
+  checked: '2026-09-04'

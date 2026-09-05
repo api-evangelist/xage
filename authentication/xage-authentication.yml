@@ -1,0 +1,55 @@
+generated: '2026-09-04'
+method: probed
+source: https://xage.com/.well-known/oauth-authorization-server
+note: >-
+  Derived from the two OAuth discovery documents Xage actually serves on xage.com. These describe
+  authentication to the WordPress-hosted MCP server on the marketing site, NOT to the Xage Fabric
+  Platform product API — see mcp/xage-mcp.yml. The Fabric Manager API's own auth model is not
+  publicly documented; the only public third-party description (Axonius' Xage adapter) states it
+  accepts either a username/password credential or an access-request token bound to a user account,
+  against a customer-supplied Xage server hostname or IP.
+schemes:
+- id: mcp_oauth2
+  type: oauth2
+  applies_to: https://xage.com/wp-json/mcp/mcp-oauth-server
+  flows:
+    authorization_code:
+      authorization_url: https://xage.com/oauth/authorize
+      token_url: https://xage.com/oauth/token
+      refresh_url: https://xage.com/oauth/token
+      revocation_url: https://xage.com/oauth/revoke
+      scopes:
+        mcp: Access the Model Context Protocol server
+  pkce_required_methods: [S256]
+  response_types: [code]
+  grant_types: [authorization_code, refresh_token]
+  token_endpoint_auth_methods: [none]
+  bearer_methods: [header]
+  public_client: true
+  dynamic_client_registration: false
+  client_id_metadata_document_supported: true
+  authorization_response_iss_parameter_supported: true
+  evidence:
+  - url: https://xage.com/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://xage.com/.well-known/oauth-protected-resource
+    status: 200
+  - url: https://xage.com/wp-json/mcp/mcp-oauth-server
+    status: 401
+undocumented_surfaces:
+- name: Xage Fabric Manager REST API
+  reason: >-
+    Reference is published only inside the customer-authenticated Xage support portal
+    (xage.zendesk.com / support.xage.com). The Zendesk Help Center API returns
+    401 "Couldn't authenticate you" anonymously, so no auth documentation could be read.
+  evidence:
+  - url: https://xage.zendesk.com/api/v2/help_center/en-us/articles.json
+    status: 401
+  - url: https://xage.com/support/
+    status: 200
+  third_party_description:
+    source: https://docs.axonius.com/docs/xage
+    methods: [username-password, access-request-token]
+    host: customer-supplied Xage server hostname or IP address
+docs: null
+docs_note: Xage publishes no public authentication documentation page.

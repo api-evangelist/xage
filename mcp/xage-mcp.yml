@@ -1,0 +1,70 @@
+generated: '2026-09-04'
+method: probed
+source: https://xage.com/.well-known/oauth-protected-resource
+name: Xage Security Website MCP Server
+status: published
+deployment:
+  mode: remote
+  endpoint: https://xage.com/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+scope: website-content
+scope_note: >-
+  READ THIS BEFORE USING THIS ARTIFACT. The MCP endpoint below is real, reachable and served by
+  Xage Security's own host, but it is the WordPress MCP adapter mounted on the xage.com marketing
+  site — the `mcp` REST namespace visible in https://xage.com/wp-json/ alongside `wp/v2`,
+  `wp-abilities/v1`, `yoast/v1` and `wordfence/v1`. It exposes site content and WordPress
+  abilities, NOT the Xage Fabric Platform product API. Xage's product API (the Fabric Manager
+  REST API that third parties such as Axonius integrate against) is documented only inside the
+  customer-authenticated Xage support portal and has no public endpoint, spec or reference.
+  Do not present this endpoint as the Xage Fabric API.
+endpoints:
+- url: https://xage.com/wp-json/mcp/mcp-oauth-server
+  transport: streamable-http
+  methods: [POST, GET, DELETE]
+  auth: oauth
+  observed_status: 401
+  observed_body: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+- url: https://xage.com/wp-json/mcp/mcp-adapter-default-server
+  transport: streamable-http
+  methods: [POST, GET, DELETE]
+  auth: unknown
+  observed_status: null
+  note: listed in the public /wp-json/mcp route index; not separately probed
+authorization:
+  discovery:
+  - url: https://xage.com/.well-known/oauth-protected-resource
+    status: 200
+    spec: RFC 9728 OAuth 2.0 Protected Resource Metadata
+    file: well-known/xage-oauth-protected-resource.json
+  - url: https://xage.com/.well-known/oauth-authorization-server
+    status: 200
+    spec: RFC 8414 OAuth 2.0 Authorization Server Metadata
+    file: well-known/xage-oauth-authorization-server.json
+  issuer: https://xage.com
+  authorization_endpoint: https://xage.com/oauth/authorize
+  token_endpoint: https://xage.com/oauth/token
+  revocation_endpoint: https://xage.com/oauth/revoke
+  grant_types: [authorization_code, refresh_token]
+  pkce: [S256]
+  scopes: [mcp]
+  bearer_methods: [header]
+  dynamic_client_registration: false
+  client_id_metadata_document_supported: true
+tools:
+  known: false
+  note: >-
+    tools/list and initialize both return HTTP 401 mcp_unauthorized anonymously, so the live tool
+    set and its inputSchemas are auth-gated. No tool list was fabricated. Recovering it requires an
+    OAuth authorization_code + PKCE flow against https://xage.com/oauth/authorize with scope `mcp`.
+probes:
+- url: https://xage.com/wp-json/mcp/mcp-oauth-server
+  method: 'POST tools/list (jsonrpc 2.0)'
+  status: 401
+- url: https://xage.com/wp-json/mcp/mcp-oauth-server
+  method: 'POST initialize (protocolVersion 2025-06-18)'
+  status: 401
+- url: https://xage.com/wp-json/mcp
+  method: GET
+  status: 200
+  note: public REST route index for the mcp namespace; lists the two servers above

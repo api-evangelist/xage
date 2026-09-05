@@ -1,0 +1,18 @@
+generated: '2026-09-04'
+method: searched
+source: https://xage.com/
+note: >-
+  Xage Security publishes no pricing, plan, tier or quota page of any kind. /pricing/ returns 404
+  and the sitemap index carries no pricing URL. Every commercial path on the site funnels to a
+  human — "Request a Demo" and "Talk to an Expert" forms. This is an enterprise contact-sales
+  motion, so plan_count is an honest zero rather than an omission.
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+evidence:
+- url: https://xage.com/pricing/
+  status: 404
+- url: https://xage.com/request-a-demo/
+  status: 200
+- url: https://xage.com/talk-to-an-expert/
+  status: 200
